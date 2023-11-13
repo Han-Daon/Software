@@ -2,7 +2,6 @@
 
 import os
 from calculator import *
-from error_detector import *
 
 egg = {"1":"하나!", "2":"둘!!"}
 
