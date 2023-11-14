@@ -6,8 +6,19 @@ class Operator(Enum):
     subtraction = 2
     multiplication = 3
     equal = 4
+    egg = 5
 
-def operator_kind(operator):
+def is_right_operand(operand):
+    index = 0
+    if operand[0] == '-':   #음수인 경우
+        index = 1
+    for i in range(index, len(operand)):
+        if not 48 <= ord(operand[index]) <= 57:
+            return False
+        index = index + 1
+    return operand
+
+def is_right_operator(operator):
     if operator == '+':
         return Operator.addition
     elif operator == '-':
@@ -26,5 +37,5 @@ def calculate(operand1, operator, operand2):
         return int(operand1) - int(operand2)
     elif operator == Operator.multiplication:
         return int(operand1) * int(operand2)
-    elif operator == Operator.none:
+    elif operator == Operator.none or opperand2 == None:
         return int(operand1)
