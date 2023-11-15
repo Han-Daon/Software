@@ -66,7 +66,6 @@ def main():
 
     print("간단한 CUI 계산기")
     print("사용 가능한 연산: +, -, *(곱셈)")
-    print("종료하려면 'q'를 입력하세요.")
 
     turn = Turn.Operand #이번에 어떤 종류의 입력을 받을지
     user_input = Operator.none
