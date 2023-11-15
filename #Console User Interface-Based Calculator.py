@@ -47,19 +47,12 @@ def calculate(operand1, operator, operand2):
     elif operator == Operator.none or operand2 == None:
         return int(operand1)
 
-egg = {"20220222":"야 너네 자랑하고 싶은 거 있으면 얼마든지 해. 난 괜찮아 왜냐면 부럽지가 않어 한 개도 부럽지가 않어"}
+egg = {"100":"백점!", "10000":"만세!!!"}
 
 #다음 연산의 유형을 열거형으로 정의
 class Turn(Enum):
     Operator = 0
     Operand = 1
-
-#사용자가 'q'를 입력하면 프로그램을 종료하고, 그렇지 않으면 입력 값을 반환.
-def is_exit(var):
-    if var == 'q':
-        exit()
-    else:
-        return var
 
 #콘솔 화면을 지워줍니다. 운영 체제가 유닉스 계열일 경우 'clear'를, 윈도우일 경우 'cls'를 사용
 def clear_console():
@@ -81,10 +74,10 @@ def main():
     while True:
         operand = None
         if turn == Turn.Operand:     #이전 루프에서 연산자 혹은 잘못된 피연산자를 입력받음
-            user_input = is_exit(input("피연산자를 입력하세요: "))
+            user_input = input("피연산자를 입력하세요: ")
         else:                       #이전 루프에서 피연산자 혹은 잘못된 연산자를 입력받음
-            user_input = is_exit(input("연산자를 입력하세요: "))
-
+            user_input = input("연산자를 입력하세요: ")
+            
         # 이스터에그 체크 & 이스터에그 입력 즉시 바로 출력 및 종료
         if user_input in egg:
             print(egg[user_input])
