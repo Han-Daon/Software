@@ -1,9 +1,12 @@
-#Console User Interface-Based Calculator
+# Console User Interface-Based Calculator
 import os
 from enum import Enum
 import msvcrt
 
-#계산기에서 사용할 연산자들을 열거형으로 정의
+# 이스터에그
+egg = {"100":"백점!", "10000":"만세!!!"}
+
+# 계산기에서 사용할 연산자들을 열거형으로 정의
 class Operator(Enum):
     none = 0
     addition = 1
@@ -12,7 +15,7 @@ class Operator(Enum):
     equal = 4
     egg = 5
 
-#피연산자가 올바른지 검사합니다. 피연산자가 음수일 경우 '-'(음수)을 제외하고 검사
+# 피연산자가 올바른지 검사합니다. 피연산자가 음수일 경우 '-'(음수)을 제외하고 검사
 def is_right_operand(operand):
     index = 0
     if operand[0] == '-':   #음수인 경우
@@ -23,7 +26,7 @@ def is_right_operand(operand):
         index = index + 1
     return operand
 
-#입력받은 문자열 연산자를 해당하는 Operator 열거형으로 변환
+# 입력받은 문자열 연산자를 해당하는 Operator 열거형으로 변환
 def is_right_operator(operator):
     if operator == '+':
         return Operator.addition
@@ -36,7 +39,7 @@ def is_right_operator(operator):
     else:
         return False
 
-#두 피연산자와 연산자를 받아, 해당 연산을 수행하고 결과를 반환
+# 두 피연산자와 연산자를 받아, 해당 연산을 수행하고 결과를 반환
 def calculate(operand1, operator, operand2):
     if operator == Operator.addition:
         return int(operand1) + int(operand2)
@@ -47,34 +50,32 @@ def calculate(operand1, operator, operand2):
     elif operator == Operator.none or operand2 == None:
         return int(operand1)
 
-egg = {"100":"백점!", "10000":"만세!!!"}
-
-#다음 연산의 유형을 열거형으로 정의
+# 다음 연산의 유형을 열거형으로 정의
 class Turn(Enum):
     Operator = 0
     Operand = 1
 
-#콘솔 화면을 지워줍니다. 운영 체제가 유닉스 계열일 경우 'clear'를, 윈도우일 경우 'cls'를 사용
+# 콘솔 화면을 지워줍니다. 운영 체제가 유닉스 계열일 경우 'clear'를, 윈도우일 경우 'cls'를 사용
 def clear_console():
     os.system('clear' if os.name == 'posix' else 'cls')
 
 def main():
-    #변수 초기화
+    # 변수 초기화
     result = 0
     operator = Operator.addition
     error = False
 
     print("간단한 CUI 계산기")
     print("사용 가능한 연산: +, -, *(곱셈)")
-
-    turn = Turn.Operand #이번에 어떤 종류의 입력을 받을지
+ 
+    turn = Turn.Operand # 이번에 어떤 종류의 입력을 받을지
     user_input = Operator.none
 
     while True:
         operand = None
-        if turn == Turn.Operand:     #이전 루프에서 연산자 혹은 잘못된 피연산자를 입력받음
+        if turn == Turn.Operand:     # 이전 루프에서 연산자 혹은 잘못된 피연산자를 입력받음
             user_input = input("피연산자를 입력하세요: ")
-        else:                       #이전 루프에서 피연산자 혹은 잘못된 연산자를 입력받음
+        else:                       # 이전 루프에서 피연산자 혹은 잘못된 연산자를 입력받음
             user_input = input("연산자를 입력하세요: ")
             
         # 이스터에그 체크 & 이스터에그 입력 즉시 바로 출력 및 종료
@@ -96,7 +97,7 @@ def main():
                 else:
                     result = calculate(result, operator, operand)
                     
-            turn = Turn.Operator #다음 입력은 연산자
+            turn = Turn.Operator # 다음 입력은 연산자
                   
         else:
             operator = is_right_operator(user_input)
@@ -115,44 +116,7 @@ def main():
                 if not operator:
                     error = True
 
-            turn = Turn.Operand #다음 입력은 피연산자
+            turn = Turn.Operand # 다음 입력은 피연산자
 
 if __name__ == "__main__":
     main()
-
-
-# 테스트 케이스 1
-# 15
-# -
-# 3
-# -
-# 10
-# = 2
-
-# 테스트 케이스 2
-# 3
-# *
-# 1
-# *
-# 5
-# = 15
-
-# 테스트 케이스 3
-# 3
-# *
-# 1
-# /
-# 5
-# = ERROR!
-
-# 테스트 케이스 4
-# 3
-# /
-# 5
-# = ERROR!
-
-# 테스트 케이스 5
-# 5.5
-# *
-# 2
-# = ERROR!
