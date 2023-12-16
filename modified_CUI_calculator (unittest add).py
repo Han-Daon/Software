@@ -114,8 +114,8 @@ def main():
                     print("[SYSTEM] ERROR!")
                     exit()
                 elif user_input == "!":
-                    print("[SYSTEM] Input ERROR!")
-                    return "[SYSTEM] Input ERROR!"
+                    print("[ERROR] Input Error")
+                    return "[SYSTEM] Input Error"
             # 정상 입력이면 계산
             else:
                 result = calculate(result, operator, operand)    
