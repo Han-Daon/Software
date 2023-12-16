@@ -114,8 +114,8 @@ def main():
                     print("[SYSTEM] ERROR!")
                     exit()
                 elif user_input == "!":
-                    print("[ERROR] Input Error")
-                    return "[SYSTEM] Input Error"
+                    print("[SYSTEM] Input ERROR!")
+                    return "[SYSTEM] Input ERROR!"
             # 정상 입력이면 계산
             else:
                 result = calculate(result, operator, operand)    
@@ -214,6 +214,7 @@ class TestFactorial(unittest.TestCase):
 
     def testMinusErrorFactorial(self):
         self.assertEqual(calculate(-3, Operator.factorial, 0), -1)
+        self.assertEqual(calculate(-10, Operator.factorial, 0), -1)
         #음수 팩토리얼 입력시 오류 출력을 확인하는 테스트케이스 
         #오류시 해당 메서드는 -1로 출력
 
